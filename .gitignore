@@ -1,0 +1,15 @@
+bin/
+obj/
+.idea/
+RougeTacToe/Assets/StreamingAssets/dump.json.meta
+*.gv
+*.pdf
+RougeTacToe/Assets/StreamingAssets/dump.json
+*.gv
+*.pdf
+*.pyc
+Games/JankFatafl/Builds
+Games/JankFatafl/Assets/ML-Agents
+Games/JankFatafl/Learning/Build
+Games/JankFatafl/Learning/MLAgents/results
+.DS_Store

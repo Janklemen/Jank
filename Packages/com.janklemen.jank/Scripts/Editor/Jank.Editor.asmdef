@@ -1,0 +1,19 @@
+{
+    "name": "Jank.Editor",
+    "rootNamespace": "Jank.Editor",
+    "references": [
+        "GUID:d1942ef922606af48a19d079d84ec0b9",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

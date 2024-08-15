@@ -1,0 +1,14 @@
+{
+  "name": "com.janklemen.jank",
+  "version": "0.0.1",
+  "displayName": "Jank",
+  "description": "A framework that will act as the backend for all janklemen games",
+  "unity": "2019.1",
+  "dependencies": {},
+  "keywords": [],
+  "author": {
+    "name": "James McCafferty",
+    "email": "jamesmccafferty@live.ca",
+    "url": "https://www.janklemen.com"
+  }
+}

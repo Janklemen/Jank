@@ -1,5 +1,3 @@
-using Jank.Inspector.CustomEditorGenerator;
-using Unity.VisualScripting.YamlDotNet.Core;
 using UnityEngine;
 
 namespace Jank.Editor.Examples

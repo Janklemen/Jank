@@ -1,10 +1,7 @@
-using System;
 using System.Linq;
-using System.Reflection;
-using System.Collections;
 using Microsoft.CodeAnalysis;
 
-namespace Jank.Inspector.CustomEditorGenerator
+namespace JankGen.CustomEditor.MemberHandling.MemberHandlers
 {
     public class JankInspectInterfaceListInspectorMemberHandler : AMemberHandler
     {

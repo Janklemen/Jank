@@ -14,8 +14,8 @@
 
 
     <Target Name="CopyDLLs" AfterTargets="Build">
-        <Message Importance="high" Text="Copying $(TargetDir)$(ProjectName).dll to $(ProjectDir)../../../Packages/com.janklemen.Jank/Plugins/SourceGenerators" />
-        <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="$(ProjectDir)../../../Packages/com.janklemen.jank/Plugins/SourceGenerators" />
+        <Message Importance="high" Text="Copying $(TargetDir)$(ProjectName).dll to $(ProjectDir)../../Packages/com.janklemen.jank/Plugins/SourceGenerators" />
+        <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="$(ProjectDir)../../Packages/com.janklemen.jank/Plugins/SourceGenerators" />
     </Target>
     
 </Project>

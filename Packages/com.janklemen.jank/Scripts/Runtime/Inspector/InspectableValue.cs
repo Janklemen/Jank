@@ -23,37 +23,15 @@ namespace Jank.Inspector
             SetData(name, type, value, enabled);
         }
 
-        public void SetData(string name, Type type, object value, bool enabled = false)
+        public void SetData(string memberName, Type type, object value, bool enabled = false)
         {
-            VisualElement valToAdd = null;
-
             if (enabled)
             {
-                Add(UTInspection.GetHandler(type).RenderInput(name, out ObjectGetter, value));
+                Add(UTInspection.GetHandler(type).RenderInput(memberName, out ObjectGetter, value));
             }
             else
             {
-                Add(UTInspection.GetHandler(type).RenderInspector(name, value));
-            }
-            
-            
-            return;
-            
-            
-            switch (Type.GetTypeCode(type))
-            {
-                default:
-                    {
-                        valToAdd = new ObjectInspector(name, value);
-                    }
-                    break;
-            }
-
-            if (valToAdd != null)
-            {
-                valToAdd.AddToClassList("unity-base-field__aligned");
-                valToAdd.SetEnabled(enabled);
-                Add(valToAdd);
+                Add(UTInspection.GetHandler(type).RenderInspector(memberName, value));
             }
         }
     }

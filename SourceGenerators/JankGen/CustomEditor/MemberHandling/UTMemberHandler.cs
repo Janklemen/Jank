@@ -1,7 +1,7 @@
-using System.Reflection;
+using JankGen.CustomEditor.MemberHandling.MemberHandlers;
 using Microsoft.CodeAnalysis;
 
-namespace Jank.Inspector.CustomEditorGenerator
+namespace JankGen.CustomEditor.MemberHandling
 {
     public static class UTMemberHandler
     {

@@ -71,6 +71,7 @@ namespace Jank.Editor.Examples
 
         [JankSpace]
         [JankHeader("Private")]
+#pragma warning disable CS0414 // Field is assigned but its value is never used
         [JankInspect] int _intPrivate = 10;
         [JankInspect] float _floatPrivate = 10.0f;
         [JankInspect] double _doublePrivate = 10.0d;
@@ -88,6 +89,7 @@ namespace Jank.Editor.Examples
         [JankInspect] Rect _rectPrivate = new Rect(3,3,4,4);
         [JankInspect] TestEnum _enumPrivate = TestEnum.Vale4;
         [JankInspect] Transform _uobjectPrivate;
+#pragma warning restore CS0414 // Field is assigned but its value is never used
 
         [JankSpace]
         [JankHeader("Interfaces")]

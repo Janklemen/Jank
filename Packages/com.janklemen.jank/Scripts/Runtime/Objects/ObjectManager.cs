@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Cysharp.Threading.Tasks;
 using Jank.Utilities;
 using UnityEngine;
@@ -44,8 +45,8 @@ namespace Jank.Objects
 
         public ObjectManager(Transform parent = null)
         {
-            RegisterSingle((IObjectManager) this);
-            RegisterSingle((IObjectPool) this);
+            RegisterSingle((IObjectManager)this);
+            RegisterSingle((IObjectPool)this);
         }
 
         /// <summary>
@@ -67,7 +68,7 @@ namespace Jank.Objects
 
             foreach (object value in _singles.Values)
                 allObjects.Add(value);
-            
+
             foreach (object value in _tagged.Values)
                 allObjects.Add(value);
 
@@ -100,8 +101,50 @@ namespace Jank.Objects
         {
             if (obj is IJankInjectable injectable)
                 injectable.Inject(this);
+            else
+            {
+                foreach (MemberInfo memberInfo in obj.GetType().GetMembers(BindingFlags.Static
+                                                                           | BindingFlags.Public
+                                                                           | BindingFlags.NonPublic
+                                                                           | BindingFlags.Instance))
+                {
+                    ProcessMember(obj, memberInfo);
+                }
+            }
 
             return obj;
+        }
+
+        public void ProcessMember(object obj, MemberInfo memberInfo)
+        {
+            if (obj == null)
+                return;
+
+            try
+            {
+                if (memberInfo is FieldInfo fi)
+                {
+                    if (fi.GetValue(obj) != null && fi.GetValue(obj) is IJankInjectable fiv)
+                        fiv.Inject(this);
+                    else
+                    {
+                        ProcessMember(fi.GetValue(obj), fi.FieldType);
+                    }
+                }
+                else if (memberInfo is PropertyInfo pi)
+                {
+                    if (pi.GetValue(obj) != null && pi.GetValue(obj) is IJankInjectable piv)
+                        piv.Inject(this);
+                    else
+                    {
+                        ProcessMember(pi.GetValue(obj), pi.PropertyType);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                // Ignore anything that throws an exception on GetValue
+            }
         }
 
         public void ProcessGameObject(GameObject obj)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Jank.Utilities;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Jank.Objects
 {
@@ -39,6 +40,7 @@ namespace Jank.Objects
         {
             _goPoolParent = new("_ObjectPool");
             _goPoolParent.transform.SetSiblingIndex(0);
+            Object.DontDestroyOnLoad(_goPoolParent);
         }
 
         /// <summary>

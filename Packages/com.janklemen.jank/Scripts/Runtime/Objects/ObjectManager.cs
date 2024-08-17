@@ -99,6 +99,9 @@ namespace Jank.Objects
         /// <returns>The object after processing</returns>
         public T ProcessObject<T>(T obj)
         {
+            if (obj == null)
+                return obj;
+            
             if (obj is IJankInjectable injectable)
                 injectable.Inject(this);
             else

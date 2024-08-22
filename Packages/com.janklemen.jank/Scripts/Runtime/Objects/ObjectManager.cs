@@ -40,6 +40,8 @@ namespace Jank.Objects
 
         IObjectPool _pool = ObjectPool.Instance;
 
+        List<object> _processed = new();
+        
         public IReadOnlyDictionary<Type, object> Singles => _singles;
         public IReadOnlyDictionary<string, object> Labeled => _labeled;
 
@@ -64,6 +66,7 @@ namespace Jank.Objects
 
         void ReprocessAllObjects()
         {
+            _processed.Clear();
             HashSet<object> allObjects = new();
 
             foreach (object value in _singles.Values)
@@ -101,10 +104,16 @@ namespace Jank.Objects
         {
             if (obj == null)
                 return obj;
+
+            if (_processed.Contains(obj))
+                return obj;
+            
+            _processed.Add(obj);
             
             if (obj is IJankInjectable injectable)
                 injectable.Inject(this);
-            else
+            // TODO: Think about how to visit all members of a type. The problem is right now that Unity has a bunch of fields that throw exceptions that get passes try catch if you try to get their value cause they're obsolete. 
+            else if(!obj.GetType().Namespace.StartsWith("UnityEngine"))
             {
                 foreach (MemberInfo memberInfo in obj.GetType().GetMembers(BindingFlags.Static
                                                                            | BindingFlags.Public
@@ -122,7 +131,7 @@ namespace Jank.Objects
         {
             if (obj == null)
                 return;
-
+        
             try
             {
                 if (memberInfo is FieldInfo fi)
@@ -152,6 +161,9 @@ namespace Jank.Objects
 
         public void ProcessGameObject(GameObject obj)
         {
+            if(_processed.Contains(obj))
+                return;
+            
             obj.BFS(g =>
             {
                 foreach (MonoBehaviour monoBehaviour in g.GetComponents<MonoBehaviour>())

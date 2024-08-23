@@ -40,7 +40,6 @@ namespace Jank.Objects
         {
             _goPoolParent = new("_ObjectPool");
             _goPoolParent.transform.SetSiblingIndex(0);
-            Object.DontDestroyOnLoad(_goPoolParent);
         }
 
         /// <summary>
